@@ -1,39 +1,59 @@
-Overview
+翻译自2020.7.12-
+Overview概述
 ========
 The Shaders Mod makes use of a deferred rendering pipeline. 
+该着色器mod使用的是延迟渲染管线
 The gbuffer shaders come first in the pipeline. They render data to textures that will be sent to the composite shaders. 
+该管线中打头的是gbuffer着色器，它们把数据渲染到纹理中，然后发送到合成着色器（composite shaders）
 Optional deferred shaders can be added between terrain and water rendering.
+在地形和水着色器之间可以自选并插入一些着色器
 The composite shaders then render to textures that will be sent to the final shader. 
+之后，综合着色器的渲染结果将发送给最终着色器（final shader）
 The final shader renders directly to the screen.
+最终着色器会把图像直接渲染到屏幕
 
-Shader Files
+Shader Files着色器文件
 ============
 All shader files are placed in the folder "shaders" of the shader pack.
+所有着色器文件都放在“shaders”文件夹
 The shader source files use the name of the program in which they are to be used with extension depending on their type.
+【看不懂。。大概是扩展名决定了它们是什么类型的文件】
 
-Extension  Type                 
+Extension  Type 扩展名类型
 ==========================
-.vsh       Vertex shader     
-.gsh       Geometry shader   
-.fsh       Fragment shader   
+.vsh       Vertex shader     顶点着色器
+.gsh       Geometry shader   几何着色器
+.fsh       Fragment shader   片段着色器
 
 Geometry shaders need either OpenGL 3.2 with layout qualifiers or the extension GL_ARB_geometry_shader4 with configuration "maxVerticesOut".
 
-Color Attachments
+Color Attachments 颜色附件
 =================
 The data is passed from shader to shader using color attachments. 
+数据依靠颜色附件在shader之间传递
 There are at least 4 for all machines. For machines that can support it, there are 8. 
+任何设备都至少有4个颜色附件，一些设备甚至支持8个
 In the deferred, composite and final shaders, these are referenced by the gcolor, gdepth, gnormal, composite, gaux1, gaux2, gaux3 and gaux4 uniforms
+在延迟、综合和最终着色器中，这些颜色附件可以由以下名称调用（uniform形式）：gcolor（颜色）, gdepth（深度）, gnormal（法线）, composite（合成）, gaux1, gaux2, gaux3, gaux4
 (colortex0 to colortex7 can be used instead of gcolor, gdepth etc.)
+（也可以用colortex0到colortex7来替代）
 Despite the naming, all of these color attachments are the same and can be used for any purpose with the exception of the first two. 
+除了前两个（gcolor、gdepth），其他的颜色附件都是一样的，可以用作任何目的
 The first one, gcolor has its color cleared to the current fog color before rendering. 
+第一个颜色附件：gcolor会在渲染之前把它的颜色全部置为（即初始化为）当前的雾色（底色？）
 The second one, gdepth has its color cleared to solid white before rendering and uses a higher precision storage buffer suitable for storing depth values. 
+第二个颜色附件：gdepth初始化为纯白，并且它使用更高精度的存储缓冲，更适合存储深度信息。
 The rest have their color cleared to black with 0 alpha.
+其他颜色附件初始化颜色为纯黑，alpha通道也是0.
 
 Each color attachment uses 2 buffers (A and B) with logical names "main" and "alt", which can be used as ping-pong buffers.
+每个颜色附件都使用两个缓冲（A和B），分别对应逻辑名称“main”和“alt”，可被用来作为乒乓缓冲。
 When the buffers are flipped the mapping between main/alt and A/B is reversed.
+缓冲翻转时，main/alt和A/B之间的映射也翻转。
 Gbuffer programs always read from "main" (only gaux1-4) and write to "main" buffers (they shouldn't read and write to the same buffer at the same time).
+G缓冲（Gbuffer）程序总是从“main”（只有gaux1-4）读取而写入“main”缓冲（不应该在同一时间内对同一个缓冲又读又写）
 Deferred/composite programs always read from "main" and write to "alt" buffers. 
+延迟/合成程序总是从“main”读，写入“alt”。
 After a deferred/composite program is rendered the buffers that it writes to are flipped so the next programs can see the current output as input.
 The property "flip.<program>.<buffer>=<true|false>" can be used to enable or disable the flip independant of the buffer write.
 The virtual programs "deferred_pre" and "composite_pre" can be used for buffer flipping before the deferred/composite pass.
