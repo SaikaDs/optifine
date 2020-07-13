@@ -562,12 +562,20 @@ Pixel Types
 Block ID mapping
 ================
 The block ID mapping is defined in "shaders/block.properties" included in the shader pack.
+方块ID映射被定义在光影包目录下的"shaders/block.properties"文件里。
 Forge mods may add custom block mapping as "assets/<modid>/shaders/block.properties" in the mod JAR file.
+Forge的各种mod可能会添加一些自定义方块，它们的映射可以在该mod的jar文件中的"assets/<modid>/shaders/block.properties"文件中找到。
 The "block.properties" file can use conditional preprocessor directives (#ifdef, #if, etc.)
+文件"block.properties"可以用条件预处理指令。
 For more details see section "Standard Macros" A to G. Option macros are not available.
+想要查看更多信息可参见章节"Standard Macros"的A到G。选项宏不可用。
 Format "block.<id>=<block1> <block2> ..."
+格式为"block.<id>=<block1> <block2> ..."
 The key is the substitute block ID, the values are the blocks which are to be replaced.
+可以用key来代替方块ID，其值就是需要被替换的方块。
 Only one line per block ID is allowed.
+每个方块ID只允许写在一行里。
+
 See "properties_files.txt" for the block matching rules.
 
   # Short format
