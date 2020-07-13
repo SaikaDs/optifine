@@ -55,14 +55,21 @@ G缓冲（Gbuffer）程序总是从“main”（只有gaux1-4）读取而写入�
 Deferred/composite programs always read from "main" and write to "alt" buffers. 
 延迟/合成程序总是从“main”读，写入“alt”。
 After a deferred/composite program is rendered the buffers that it writes to are flipped so the next programs can see the current output as input.
+在一个延迟/合成程序渲染结束后，被它写入的缓冲将翻转，以便下一个程序把当前输出当做输入。
 The property "flip.<program>.<buffer>=<true|false>" can be used to enable or disable the flip independant of the buffer write.
+可以使用属性"flip.<program>.<buffer>=<true|false>"来启用或关闭独立于缓冲写入的翻转功能。
 The virtual programs "deferred_pre" and "composite_pre" can be used for buffer flipping before the deferred/composite pass.
+虚拟程序"deferred_pre"和"composite_pre"可于延迟/合成pass之前被用于缓冲翻转。
 
 When writing to the color attachments in the composite shader, blending is disabled. 
+在合成着色器中写入颜色附件时，混合是不可用的。
 Writing to color attachments that the composite shader also reads from will generate artifacts (unless you just copy the original contents) 
+写入合成着色器也要读取的颜色附件时，将产生artifacts（除非你仅仅复制原内容）
 
 The vertex and fragment configuration parsing is affected by the preprocessor conditional compilation directives.
+顶点和片段配置解析将受预处理条件编译指令影响。
 The following preprocessor directives are currently recognized:
+下列预处理指令是公认的：
   #define <macro>
   #undef <macro>
   #ifdef <macro>
@@ -77,10 +84,11 @@ The following preprocessor directives are currently recognized:
   #endif
 
 The current shaderpack can be reloaded by pressing "F3+R" or using the command "/reloadShaders". 
+可以用“F3+R”或者指令“/reloadShaders”来重新加载光影包。
 
 Shader Programs
 ===============
-Name                         Render                                When not defined use
+Name                         Render                                When not defined use （缺省时使用的上级着色器）
 ========================================================================================
 <none>                       gui, menus                            <none>
 --- Shadow map ---
