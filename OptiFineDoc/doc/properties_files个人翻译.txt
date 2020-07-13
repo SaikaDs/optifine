@@ -40,23 +40,30 @@ This is simply the path to the texture within the zip file. The folder structure
 so OptiFine has some shortcuts to make things easier. Whenever OptiFine calls for you to provide a texture file, 
 any of these options can be used to specify the path.
 Optifine一般要求你指定一个图片文件的路径或者你纹理包中其他的资源。
-这单纯就是纹理在该压缩包中的路径，
+这单纯就是纹理在该压缩包中的路径，纹理包的文件夹结构可以有多层嵌套，因此Optifine拥有一些快捷方式来更便捷地处理。
+不论何时，Optifine请求提供一个纹理文件时，这些选项中的任何一个都可以用来确定路径。
 
 The most straightforward method is simply a path relative to assets/minecraft:
+最直接的方式就是一个相关于assets/minecraft的路径
 
   # Full path
   texture=textures/entity/creeper/creeper.png
 
 This refers to "assets/minecraft/textures/entity/creeper/creeper.png" within the zip file or folder of your texture pack. 
+这代表了你压缩包里的"assets/minecraft/textures/entity/creeper/creeper.png"这个路径。
 Always use forward slashes "/" to separate folder names. Regardless of your OS, do not use backslashes "\" 
+路径中必须用正斜杠“/”，不管你是什么操作系统，都别用反斜杠“\”。
 or the game will not properly recognize the path.
+否则游戏程序不能正确地读取路径。
 
 An optional "namespace" prefix can be added. This example refers to exactly the same "creeper.png" file as above:
+可以添加一个可选的字首“namespace”，引用跟上面一样的"creeper.png"文件如下：
 
   # Full path with namespace
   texture=minecraft:textures/entity/creeper/creeper.png
 
 For textures used by other mods, the namespace will often be something other than "minecraft":
+其他mod中使用的纹理的namespace（命名空间）通常不是“minecraft”。
   
   # Full path with mod namespace
   texture=herobrine:textures/entity/him.png
@@ -64,7 +71,10 @@ For textures used by other mods, the namespace will often be something other tha
 This refers to "assets/herobrine/textures/entity/him.png", not to "assets/minecraft/textures/entity/him.png".
 
 Many textures specific to OptiFine are in the "assets/minecraft/optifine" folder. 
+很多Optifine特有的纹理位于"assets/minecraft/optifine"。
+
 Since it is used so frequently, it can be represented by the tilde "~" character. The following refer to the same file:
+因为上述路径使用得很频繁，它可以用“~”符号来指代。下面例子都表示同一个文件：
 
   # Relative to "assets/minecraft/optifine"
   texture=~/dial/clock0.png
