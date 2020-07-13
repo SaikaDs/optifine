@@ -1,13 +1,17 @@
 =============================================================
 Description of OptiFine's configuration properties files
+OptiFine的配置属性文件的描述
 Based on McPatcher's configuration files
+基于McPatcher的配置文件
 =============================================================
 
-Overview
+Overview概述
 ========
 
 Many OptiFine features use properties files to control how textures within your texture pack are used. 
+很多Optifine的特性都使用属性文件来控制你的纹理包里的纹理如何被使用。
 Properties files are simple text files similar to the Windows ".ini" format. Each line is a property, specified as name=value.
+属性文件就是简单的文本文件，类似于Windows的.ini格式。每一行都是一条属性，形式为name=value.
 
   # Sample comment
   property1=value
@@ -19,17 +23,24 @@ Properties files are simple text files similar to the Windows ".ini" format. Eac
 All property names are case-sensitive "renderpass" is not the same as "renderPass". The order of properties within the file 
 does not matter. Many properties have default values and can be omitted, and in some cases the entire properties file is optional. 
 See the sections for each properties file for details.
+所有属性名称都是区分大小写的，例如"renderpass"不同于"renderPass"。属性在文件中的顺序不影响。很多属性有默认值，可以省略，有时候整个属性文件都可以省略。
+每个属性的具体内容请参见各自的章节。
 
 Certain types of objects are used within properties files by different OptiFine features. 
-Rather than describe these common types separately in each feature section, they are summarized here instead.
+对象的具体类型由不同的optifine特性在属性文件中使用。
 
-Textures
+Rather than describe these common types separately in each feature section, they are summarized here instead.
+这些常见类型在这里汇总介绍，就不在各自章节里介绍了。
+
+Textures纹理
 ========
 
 Often, OptiFine requires you to specify a path to an image file or some other resource within your texture pack. 
 This is simply the path to the texture within the zip file. The folder structure within a texture pack can get deeply nested, 
 so OptiFine has some shortcuts to make things easier. Whenever OptiFine calls for you to provide a texture file, 
 any of these options can be used to specify the path.
+Optifine一般要求你指定一个图片文件的路径或者你纹理包中其他的资源。
+这单纯就是纹理在该压缩包中的路径，
 
 The most straightforward method is simply a path relative to assets/minecraft:
 
