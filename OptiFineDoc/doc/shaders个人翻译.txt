@@ -8,7 +8,7 @@ The gbuffer shaders come first in the pipeline. They render data to textures tha
 Optional deferred shaders can be added between terrain and water rendering.
 在地形和水着色器之间可以自选并插入一些着色器
 The composite shaders then render to textures that will be sent to the final shader. 
-之后，综合着色器的渲染结果将发送给最终着色器（final shader）
+之后，合成着色器的渲染结果将发送给最终着色器（final shader）
 The final shader renders directly to the screen.
 最终着色器会把图像直接渲染到屏幕
 
@@ -34,7 +34,7 @@ The data is passed from shader to shader using color attachments.
 There are at least 4 for all machines. For machines that can support it, there are 8. 
 任何设备都至少有4个颜色附件，一些设备甚至支持8个
 In the deferred, composite and final shaders, these are referenced by the gcolor, gdepth, gnormal, composite, gaux1, gaux2, gaux3 and gaux4 uniforms
-在延迟、综合和最终着色器中，这些颜色附件可以由以下名称调用（uniform形式）：gcolor（颜色）, gdepth（深度）, gnormal（法线）, composite（合成）, gaux1, gaux2, gaux3, gaux4
+在延迟、合成和最终着色器中，这些颜色附件可以由以下名称调用（uniform形式）：gcolor（颜色）, gdepth（深度）, gnormal（法线）, composite（合成）, gaux1, gaux2, gaux3, gaux4
 (colortex0 to colortex7 can be used instead of gcolor, gdepth etc.)
 （也可以用colortex0到colortex7来替代）
 Despite the naming, all of these color attachments are the same and can be used for any purpose with the exception of the first two. 
